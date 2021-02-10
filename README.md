@@ -4,14 +4,15 @@ CSCI 5117, Spring 2021, [assignment description](https://canvas.umn.edu/courses/
 
 ## App Info:
 
-* Team Name: TODO
+* Team Name: **Lemon Squeezy**
 * App Name: TODO
 * App Link: <https://TODO.heroku.com/>
 
 ### Students
 
-* First Last, x500@umn.edu
-* ...
+* Ziying Cheng, cheng904@umn.edu
+* Zixuan Zhang, zhan7230@umn.edu
+* Zhaoyu Wang, wang9535@umn.edu
 
 
 ## Key Features
@@ -19,6 +20,7 @@ CSCI 5117, Spring 2021, [assignment description](https://canvas.umn.edu/courses/
 **Describe the most challenging features you implemented
 (one sentence per bullet, maximum 4 bullets):**
 
+* instantly share code, notes, and snippets 
 * ...
 
 ## Testing Notes
@@ -38,13 +40,8 @@ along with a very brief caption:**
 
 ## Mock-up 
 
-There are a few tools for mock-ups. Paper prototypes (low-tech, but effective and cheap), Digital picture edition software (gimp / photoshop / etc.), or dedicated tools like moqups.com (I'm calling out moqups here in particular since it seems to strike the best balance between "easy-to-use" and "wants your money" -- the free teir isn't perfect, but it should be sufficient for our needs with a little "creative layout" to get around the page-limit)
+Here's the [link](https://drive.google.com/file/d/1dfxoe_rPjN6-7FXmW1-2iv5YfL5lZwBw/view?usp=sharing) to the **paper prototype** on Google Drive.
 
-In this space please either provide images (max 4) showing your prototypes, OR, a link to an online hosted mock-up tool like moqups.com
-
-**[Add images/photos that show your paper prototype (maximum 4)](https://stackoverflow.com/questions/10189356/how-to-add-screenshot-to-readmes-in-github-repository) along with a very brief caption:**
-
-![](https://media.giphy.com/media/26ufnwz3wDUli7GU0/giphy.gif)
 
 
 ## External Dependencies
