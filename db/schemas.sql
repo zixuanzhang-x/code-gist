@@ -8,7 +8,7 @@ CREATE TABLE user (
     id SERIAL,
     username VARCHAR(30) NOT NULL,
     email VARCHAR(50) NOT NULL,
-    password VARCHAR(50) NOT NULL,
+    password VARCHAR NOT NULL,
     avatar BYTEA NOT NULL,
     signed_up TIMESTAMP NOT NULL,
     CONSTRAINT pk_user PRIMARY KEY(id)
@@ -17,7 +17,8 @@ CREATE TABLE user (
 CREATE TABLE gist (
     id SERIAL,
     user_id SERIAL NOT NULL,
-    name VARCHAR NOT NULL,
+    username NOT NULL,
+    name VARCHAR(150) NOT NULL,
     content TEXT NOT NULL,
     description TEXT NOT NULL,
     created TIMESTAMP NOT NULL,
