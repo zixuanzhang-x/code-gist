@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{% block title %}{% endblock %}</title>
+        <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.5/build/pure-min.css" integrity="sha384-LTIDeidl25h2dPxrB2Ekgc9c7sEC3CWGM6HeFmuDNUjX76Ert4Z4IY714dhZHPLd" crossorigin="anonymous">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        {% block script %}{% endblock %}
+    </head>
+    <body>
+            <div class="pure-menu pure-menu-horizontal wrapper">
+                <a href="/" class="pure-menu-heading pure-menu-link">Homepage</a>
+                <ul class="pure-menu-list">
+                    {% if session.profile %}
+                    <li class="pure-menu-item pure-menu-has-children pure-menu-allow-hover"">
+                        <a href="{{ url_for('user_blueprint.user_logout') }}" class="pure-menu-link">Logout</a>
+                        <ul class="pure-menu-children">
+                            <li class="pure-menu-item">
+                                <a href="#" class="pure-menu-link">My gists</a>
+                            </li>
+                            <li class="pure-menu-item">
+                                <a href="#" class="pure-menu-link">My Profile</a>
+                            </li>
+                            <li class="pure-menu-item">
+                                <a href="#" class="pure-menu-link">settings</a>
+                            </li>
+                        </ul>                    
+                    </li>
+                    {% else %}
+                    <li class="pure-menu-item"><a href="{{ url_for('user_blueprint.user_login') }}" class="pure-menu-link">Login</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        <div class="container">
+            {% block content %}{% endblock %}
+        </div>
+    </body>
+    <hr>
+    {% include 'footer.html' %}
+</html>
