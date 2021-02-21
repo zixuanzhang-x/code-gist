@@ -5,6 +5,6 @@ def login_required(f):
     @wraps(f)
     def decorated(*args, **kwargs):
         if 'profile' not in session:
-            return redirect(url_for('user_blueprint.user_login'))
+            return redirect(url_for('route_blueprint.user_login'))
         return f(*args, **kwargs)
     return decorated

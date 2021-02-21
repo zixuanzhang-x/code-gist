@@ -14,21 +14,18 @@
                 <ul class="pure-menu-list">
                     {% if session.profile %}
                     <li class="pure-menu-item pure-menu-has-children pure-menu-allow-hover"">
-                        <a href="{{ url_for('user_blueprint.user_logout') }}" class="pure-menu-link">Logout</a>
+                        <a href="#" class="pure-menu-link">{{ session['profile'].name }}</a>
                         <ul class="pure-menu-children">
                             <li class="pure-menu-item">
                                 <a href="#" class="pure-menu-link">My gists</a>
                             </li>
                             <li class="pure-menu-item">
-                                <a href="#" class="pure-menu-link">My Profile</a>
-                            </li>
-                            <li class="pure-menu-item">
-                                <a href="#" class="pure-menu-link">settings</a>
+                                <a href="{{ url_for('route_blueprint.user_logout') }}" class="pure-menu-link">Logout</a>
                             </li>
                         </ul>                    
                     </li>
                     {% else %}
-                    <li class="pure-menu-item"><a href="{{ url_for('user_blueprint.user_login') }}" class="pure-menu-link">Login</a></li>
+                    <li class="pure-menu-item"><a href="{{ url_for('route_blueprint.user_login') }}" class="pure-menu-link">Login</a></li>
                     {% endif %}
                 </ul>
             </div>
@@ -36,6 +33,5 @@
             {% block content %}{% endblock %}
         </div>
     </body>
-    <hr>
     {% include 'footer.html' %}
 </html>
