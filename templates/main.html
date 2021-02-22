@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+<title>{% block title %}{% endblock %}Lemon Gists</title>
+
+{% block script %}
+<link rel="stylesheet" href="../static/main.css">
+{% endblock %}
+
+{% block content %}
+<body>
+    {% if session.profile%}
+    <h2>Hello, {{ profile.name}}!</h2>
+    {% else %}
+    <h2>Hello, you haven't sign in!</h2>
+    {% endif %}
+</body>
+{% endblock %}
