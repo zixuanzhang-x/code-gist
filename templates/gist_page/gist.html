@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}{{gist.description}}{% endblock %}
+
+{% block script %}
+<script src="../static/js/gist.js"></script>
+{% endblock %}
+
+{% block content %}
+<body>
+    <h2 style="text-align:center;"><span>{{gist.gist_name}}</span></h2>
+    <p style="color:grey">Description: {{ gist.description }}</p>
+    <textarea>{{gist.content}}</textarea>
+    <ul id="{{ gist_id }}"></ul>
+    {% for comment in comments%}
+    <ul id="comments">
+        <p id="{{ comment.comment_id }}">
+            <span id="{{comment.user_id}}">
+                <a id="commented_user"
+                   href="{{ '/user/%s'%comment.user_id }}"
+                   title="{{ comment.user_id }}"
+                   style="text-decoration:none;"
+                >
+                </a>
+            </span>
+            commented at {{ comment.commented_at }}
+        </p>
+        <textarea id="{{ comment.comment_id }}" name="content">{{ comment.content }}</textarea>
+    </ul>
+    {% endfor %}
+    <hr>
+    <form>
+        <textarea id="content" name="advice" placeholder="Leave a comment"></textarea>
+        <button
+            id="submit" class="pure-button button-primary"
+            style="background: rgb(28, 184, 65); margin-top: 10px;"
+        >
+            Comment
+        </button>
+    </form>
+    <div id="errorAlert" style="background: rgb(202, 60, 60); display:none;"></div>
+</body>
+{% endblock %}
