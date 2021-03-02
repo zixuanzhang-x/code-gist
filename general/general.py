@@ -18,7 +18,7 @@ def main_page():
 @route_blueprint.route('/discover')
 def discover_page():
     if 'profile' in session:
-        return render_template('discover.html', profile=session['profile'])
+        return render_template('gist_page/discover.html', profile=session['profile'])
     return render_template('gist_page/discover.html')
 
 @route_blueprint.route('/user/<int:user_id>')
@@ -26,7 +26,6 @@ def user_page(user_id):
     users = requests.get(url = API_URI + '/api/user/' + str(user_id)).json()
     gists = requests.get(url = API_URI + '/api/user/' + str(user_id) + '/gist').json()
 
-    current_app.logger.info(session['profile'])
     return render_template('gist_page/user.html', user=users[0], gists=gists)
 
 @route_blueprint.route('/gist/<int:gist_id>')
@@ -72,5 +71,5 @@ def callback():
 @route_blueprint.route('/logout')
 def user_logout():
     session.clear()
-    params = { 'returnTo': url_for('route_blueprint.discover_page', _external=True), 'client_id': os.environ['AUTH0_CLIENT_ID'] }
+    params = { 'returnTo': url_for('route_blueprint.main_page', _external=True), 'client_id': os.environ['AUTH0_CLIENT_ID'] }
     return redirect(auth0().api_base_url + '/v2/logout?' + urlencode(params))

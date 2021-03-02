@@ -20,14 +20,16 @@
                     {% if session.profile %}
                     <li class="pure-menu-item pure-menu-has-children pure-menu-allow-hover">
                         <a title="{{ session['profile'].user_id }}" 
-                            id="current_user" 
-                            class="pure-menu-link">
+                           id="current_user"
+                           class="pure-menu-link"
+                        >
                             {{ session['profile'].name }}
                         </a>
                         <ul class="pure-menu-children">
                             <li class="pure-menu-item">
-                                <a  id="current_gists" 
-                                    class="pure-menu-link">
+                                <a id="current_gists"
+                                   class="pure-menu-link"
+                                >
                                     My gists
                                 </a>
                             </li>
