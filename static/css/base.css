@@ -50,7 +50,6 @@ a:visited, a:link {
 
 footer {
     /* border: 1px solid red; */
-    position: fixed;
     bottom: 0;
     margin: auto;
     width: 100%;
