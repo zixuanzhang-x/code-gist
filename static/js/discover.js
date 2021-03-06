@@ -1,7 +1,8 @@
 $(document).ready(function(){
+    var search = location.href.split('?q=')
     var gists = []
     $.ajax({
-        url: '/api/gist',
+        url: search.length == 1 ? '/api/gist'  : '/api/gist?q=' + search[1],
         type: 'GET',
         dataType: 'json',
         async: false,
@@ -9,6 +10,9 @@ $(document).ready(function(){
             gists = data
         }
     })
+
+    // render search bar content if searched
+    if (search.length > 1) $('input:text').val(search[1])
 
     var gist_list = $('#gists')
     gists.forEach(function(gist, index){
