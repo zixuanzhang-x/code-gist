@@ -2,7 +2,7 @@
 {% block title %}{{gist.description}}{% endblock %}
 
 {% block script %}
-<link rel="stylesheet" href="../static/css/main.css">
+<link rel="stylesheet" href="../static/css/base.css">
 <script src="../static/js/base.js"></script>
 <script src="../static/js/gist.js"></script>
 {% endblock %}
@@ -13,9 +13,11 @@
         <h2 style="width:50%"><span>{{gist.gist_name}}</span></h2>
         <div id="star_group" style="height: 5%; margin-top: 2.6%; margin-left: 15%">
             {% if session.profile %}
-            <button id="star_gist">To Star</button>
+            <button id="star_gist"></button>
             {% endif %}
-            <button id="star_num"></button>
+            <a href="{{ '/gist/%s/stargazers'%gist.gist_id }}">
+                <button id="star_num">Stared: {{gist.stars}}</button>
+            </a>
         </div>
     </div>
 
@@ -28,10 +30,9 @@
             <span id="{{comment.user_id}}">
                 <a id="commented_user"
                    href="{{ '/user/%s'%comment.user_id }}"
-                   title="{{ comment.user_id }}"
                    style="text-decoration:none;"
                 >
-                    {{comment.user_id}}
+                    {{comment.user_name}}
                 </a>
             </span>
             commented at {{ comment.commented_at }}
