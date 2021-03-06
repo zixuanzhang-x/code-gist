@@ -6,16 +6,18 @@ from flask import Blueprint, render_template, redirect, url_for, session, curren
 from urllib.parse import urlencode
 from db import db
 from auth.auth0 import auth0
+from utils.login_util import login_required
 
 route_blueprint = Blueprint('route_blueprint', __name__)
 
 API_URI = os.environ["API_URI"]
 
-@route_blueprint.route('/')
-def main_page():
-    return render_template('gist_page/main.html')
+@route_blueprint.route('/create')
+@login_required
+def create_page():
+    return render_template('gist_page/create.html')
 
-@route_blueprint.route('/discover')
+@route_blueprint.route('/')
 def discover_page():
     if 'profile' in session:
         return render_template('gist_page/discover.html', profile=session['profile'])
@@ -32,12 +34,23 @@ def user_page(user_id):
 def gist_page(gist_id):
     gists = requests.get(url = API_URI + '/api/gist/' + str(gist_id)).json()
     comments = requests.get(url = API_URI + '/api/gist/' + str(gist_id) + '/comment').json()
+    comment_user = []
+    for idx in range(len(comments)):
+        
+        comments[idx]['user_name'] = user.username_name
 
     if 'profile' in session:
         auth0_id = session['profile']['user_id']
         return render_template('gist_page/gist.html', gist=gists[0], comments = comments, auth0_id=auth0_id)
     else:
         return render_template('gist_page/gist.html', gist=gists[0], comments = comments)
+
+@route_blueprint.route('/gist/<int:gist_id>/stargazers')
+def gist_stargazers_page(gist_id):
+    gists = requests.get(url = API_URI + '/api/gist/' + str(gist_id)).json()
+    stargazers = requests.get(url = API_URI + '/api/gist/' + str(gist_id) + '/star').json()
+
+    return render_template('gist_page/gist_stargazers.html', gist=gists[0], stargazers=stargazers)
 
 @route_blueprint.route('/login')
 def user_login():
@@ -66,10 +79,10 @@ def callback():
               'picture': userinfo['picture'],
               })
 
-    return redirect(url_for('route_blueprint.discover_page'))
+    return redirect(url_for('route_blueprint.create_page'))
 
 @route_blueprint.route('/logout')
 def user_logout():
     session.clear()
-    params = { 'returnTo': url_for('route_blueprint.main_page', _external=True), 'client_id': os.environ['AUTH0_CLIENT_ID'] }
+    params = { 'returnTo': url_for('route_blueprint.discover_page', _external=True), 'client_id': os.environ['AUTH0_CLIENT_ID'] }
     return redirect(auth0().api_base_url + '/v2/logout?' + urlencode(params))

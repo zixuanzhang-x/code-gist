@@ -2,6 +2,8 @@
 {% block title %}{{ user.user_name }}{% endblock %}
 
 {% block script %}
+<link rel="stylesheet" href="../static/css/main.css">
+<script src="../static/js/base.js"></script>
 <script src="../static/js/user.js"></script>
 {% endblock %}
 
@@ -9,7 +11,7 @@
 <body>
     <h2 style="text-align:center;"><span >{{ user.user_name }}</span></h2>
     <button id="gist_num" style="margin-left: 4.6%">
-        <a href="{{ url_for('route_blueprint.user_page', user_id=user.user_id) }}" style='text-decoration:none;'>
+        <a href="{{ url_for('route_blueprint.user_page', user_id=user.user_id) }}" style='text-decoration:none; color:#333;'>
             All gists: {{ gists|length }}
         </a>
     </button>
@@ -18,10 +20,10 @@
     <ul id="{{gist.gist_id}}">
         <h3 id="{{ 'name%s'%loop.index }}">
             <span id="{{gist.user_id}}">
-                <a href="{{ '/user/%s'%gist.user_id }}" style='text-decoration:none;'>{{gist.user_name}}</a>
+                <a href="{{ '/user/%s'%gist.user_id }}" style='text-decoration:none; color:#333;'>{{gist.user_name}}</a>
             </span>
             /<span id="{{gist.gist_id}}">
-                <a href="{{ '/gist/%s'%gist.gist_id }}" style='text-decoration:none;'>{{gist.gist_name}}</a>
+                <a href="{{ '/gist/%s'%gist.gist_id }}" style='text-decoration:none; color:#333;'>{{gist.gist_name}}</a>
             </span>
         </h3>
         <p id="{{ 'desc%s'%loop.index }}">Description: {{ gist.description }}</p>

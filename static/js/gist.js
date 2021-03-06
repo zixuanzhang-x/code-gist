@@ -1,23 +1,26 @@
 $(document).ready(function(){
-    // get user_id by auth0_id
+    // get user_id by auth0_id if have session
+    var auth0_id = $('#current_user').attr('title')
     var user_id = ""
-    // TODO: get user_id using ajax post
-    // $.ajax({
-    //     url: '/api/user',
-    //     type: 'POST',
-    //     data: {
-    //         auth0_id: $('#auth0_id').val(),
-    //     },
-    //     dataType: 'json',
-    //     async: false,
-    //     success: function(data) {
-    //         user_id = data
-    //     }
-    // })
+    if (auth0_id) {
+        $.ajax({
+            url: '/api/user',
+            type: 'POST',
+            data: {
+                auth0_id: auth0_id,
+            },
+            dataType: 'json',
+            async: false,
+            success: function(data) {
+                user_id = data.user_id
+            }
+        })
+    }
 
+    // leave comment
     $('form').on('submit', function(event) {
         $.ajax({
-            url: '/gist/'+location.pathname.split('gist/')[1]+'/comment',
+            url: '/api/gist/'+location.pathname.split('gist/')[1]+'/comment',
             type: 'POST',
             data: {
                 content: $('#content').val(),
@@ -33,18 +36,35 @@ $(document).ready(function(){
         event.preventDefault()        
     })
 
-    var commented_user_id = $('#commented_user').attr('title')
-    var commented_user_name = ""
-
+    // gist star number
+    var gist_stars = []
     $.ajax({
-        url: '/api/user/'+ parseInt(commented_user_id),
+        url: '/api/gist/'+location.pathname.split('gist/')[1]+'/star',
         type: 'GET',
         dataType: 'json',
         async: false,
         success: function(data) {
-            commented_user_name = data[0].user_name
+            gist_stars = data
         }
     })
+    document.getElementById('star_num').innerHTML = "<a href=/gist/"+location.pathname.split('gist/')[1]+
+                                                    "/stargazers style='text-decoration:none; color:#333;'>Stared: "+gist_stars.length+"</a>"
 
-    document.getElementById('commented_user').innerHTML = commented_user_name
+    // star gist button
+    $("#star_gist").click(function(event) {
+        $.ajax({
+            type: "POST",
+            url: "/api/gist/"+location.pathname.split('gist/')[1]+'/star',
+            data: { 
+                user_id: user_id
+            },
+            success: function(data) {
+                alert('ok')
+            },
+            error: function(data) {
+
+            }
+        })
+        event.preventDefault()
+    })
 })
