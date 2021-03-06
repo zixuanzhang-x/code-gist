@@ -1,8 +1,8 @@
 $(document).ready(function(){
     var auth0_id = $('#current_user').attr('title')
+    var user_id = ""
     if (!auth0_id) return
 
-    var user_id = ""
     $.ajax({
         url: '/api/user',
         type: 'POST',
