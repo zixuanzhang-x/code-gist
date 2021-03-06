@@ -1,0 +1,19 @@
+.ace_editor {
+    border: 1px solid lightgray;
+    margin: auto;
+    height: 200px;
+    width: 100%;
+}
+
+.button-success {
+    background: rgb(28, 184, 65);
+    color: white;
+}
+
+input {
+    width: 100%;
+}
+
+#editor, #gistname, #description {
+    margin: 10px 0;
+}
