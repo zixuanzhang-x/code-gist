@@ -14,8 +14,8 @@ API_URI = os.environ["API_URI"]
 
 @route_blueprint.route('/create')
 @login_required
-def main_page():
-    return render_template('gist_page/main.html')
+def create_page():
+    return render_template('gist_page/create.html')
 
 @route_blueprint.route('/')
 def discover_page():
@@ -79,7 +79,7 @@ def callback():
               'picture': userinfo['picture'],
               })
 
-    return redirect(url_for('route_blueprint.main_page'))
+    return redirect(url_for('route_blueprint.create_page'))
 
 @route_blueprint.route('/logout')
 def user_logout():
