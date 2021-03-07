@@ -15,8 +15,8 @@
             {% if session.profile %}
             <button type="button" id="star_gist"></button>
             {% endif %}
-                <button id="star_num">
-                    <a href="{{ '/gist/%s/stargazers'%gist.gist_id }}">
+                <button>
+                    <a id="star_num" href="{{ '/gist/%s/stargazers'%gist.gist_id }}">
                         Stared: {{gist.stars}}
                     </a>
                 </button>

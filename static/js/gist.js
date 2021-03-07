@@ -58,6 +58,9 @@ $(document).ready(function(){
     }
 
         $('#star_gist').click(function(event) {
+            var star_num = document.getElementById('star_num')
+            var current_num = parseInt(star_num.innerText.split(': ')[1])
+
             if (document.getElementById('star_gist').innerHTML == 'To star') {
                 // star gist
                 $.ajax({
@@ -68,6 +71,7 @@ $(document).ready(function(){
                     },
                     success: function(data) {
                         document.getElementById('star_gist').innerHTML = 'Unstar'
+                        star_num.innerText = 'Stared: ' + (current_num+1)
                     }
                 })
             } else {
@@ -80,21 +84,11 @@ $(document).ready(function(){
                     },
                     success: function(data) {
                         document.getElementById('star_gist').innerHTML = 'To star'
+                        star_num.innerText = 'Stared: ' + (current_num-1)
                     }
                 })
             }
-            // update gist star number
-            var gists = []
-            $.ajax({
-                url: '/api/gist/'+ gist_id,
-                type: 'GET',
-                dataType: 'json',
-                async: false,
-                success: function(data) {
-                    gists = data
-                }
-            })
-            document.getElementById('star_num').innerHTML = 'Stared: ' + gists[0].stars
+
             event.preventDefault()
         })
 })
