@@ -11,6 +11,7 @@ $(document).ready(function(){
         }
     })
 
+
     // render search bar content if searched
     if (search.length > 1) $('input:text').val(search[1])
 
@@ -24,13 +25,26 @@ $(document).ready(function(){
         info_row.setAttribute('id', 'info_row')
         info_row.setAttribute('style', "height:30px")
 
-        // append user_name and gist_name
+        // append profile picture, user_name and gist_name
         var name_row = document.createElement('div')
         name_row.setAttribute('style', "width:50%")
         name_row.setAttribute('id', 'name'+(index+1))
 
         var names = document.createElement('h3')
 
+        var auth = []
+        $.ajax({
+            url: '/api/user/' + gist.user_id,
+            type: 'GET',
+            dataType: 'json',
+            async: false,
+            success: function(data) {
+                auth = data
+            }
+        })
+        var user_pic = document.createElement('span')
+        user_pic.setAttribute('id', gist.user_pic)
+        user_pic.innerHTML = "<img src='" + auth[0].picture + "' class='gists-userpic'>"
         var user_name = document.createElement('span')
         user_name.setAttribute('id', gist.user_id)
         user_name.innerHTML = "<a href=/user/"+gist.user_id+" class='gists-username'>"+gist.user_name+"</a>"
@@ -39,6 +53,7 @@ $(document).ready(function(){
         gist_name.innerHTML = "<a href=/gist/"+gist.gist_id+" class='gists-gistname'>"+gist.gist_name+"</a>"
         var slash = document.createElement('span')
         slash.innerHTML = " / "
+        names.appendChild(user_pic)  
         names.appendChild(user_name)
         names.appendChild(slash)
         names.appendChild(gist_name)
@@ -55,8 +70,8 @@ $(document).ready(function(){
         var stars = document.createElement('button')
         comments.setAttribute('style', 'margin-right: 16px')
 
-        comments.innerHTML= "<a href=/gist/"+gist.gist_id+" ><img src='../static/img/comment.png' >"+gist.comments+" comments</a>"
-        stars.innerHTML= "<a href=/gist/"+gist.gist_id+"/stargazers ><img src='../static/img/star.png' >"+gist.stars+" stars</a>"
+        comments.innerHTML= "<a href=/gist/"+gist.gist_id+" ><img src='../static/img/comment.png' class='btn' >"+gist.comments+" comments</a>"
+        stars.innerHTML= "<a href=/gist/"+gist.gist_id+"/stargazers ><img src='../static/img/star.png' class='btn' >"+gist.stars+" stars</a>"
 
         feature_row.appendChild(comments)
         feature_row.appendChild(stars)
