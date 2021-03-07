@@ -13,11 +13,13 @@
         <h2 style="width:50%"><span>{{gist.gist_name}}</span></h2>
         <div id="star_group" style="height: 5%; margin-top: 2.6%; margin-left: 15%">
             {% if session.profile %}
-            <button id="star_gist"></button>
+            <button type="button" id="star_gist"></button>
             {% endif %}
-            <a href="{{ '/gist/%s/stargazers'%gist.gist_id }}">
-                <button id="star_num">Stared: {{gist.stars}}</button>
-            </a>
+                <button>
+                    <a id="star_num" href="{{ '/gist/%s/stargazers'%gist.gist_id }}">
+                        Stared: {{gist.stars}}
+                    </a>
+                </button>
         </div>
     </div>
 
@@ -30,7 +32,6 @@
             <span id="{{comment.user_id}}">
                 <a id="commented_user"
                    href="{{ '/user/%s'%comment.user_id }}"
-                   style="text-decoration:none;"
                 >
                     {{comment.user_name}}
                 </a>
