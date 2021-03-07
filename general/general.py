@@ -27,14 +27,14 @@ def discover_page():
 def user_page(user_id):
     users = requests.get(url = API_URI + '/api/user/' + str(user_id)).json()
     gists = requests.get(url = API_URI + '/api/user/' + str(user_id) + '/gist').json()
+    starred = requests.get(url = API_URI + '/api/user/' + str(user_id) + '/star').json()
 
-    return render_template('gist_page/user.html', user=users[0], gists=gists)
+    return render_template('gist_page/user.html', user=users[0], gists=gists, starred=starred)
 
 @route_blueprint.route('/gist/<int:gist_id>')
 def gist_page(gist_id):
     gists = requests.get(url = API_URI + '/api/gist/' + str(gist_id)).json()
     comments = requests.get(url = API_URI + '/api/gist/' + str(gist_id) + '/comment').json()
-    comment_user = []
     for idx in range(len(comments)):
         users = requests.get(url = API_URI + '/api/user/' + str(comments[idx]['user_id'])).json()
         comments[idx]['user_name'] = users[0]['user_name']

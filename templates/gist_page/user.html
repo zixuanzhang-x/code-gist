@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}{{ user.user_name }}{% endblock %}
+{% block title %}{{ user.user_name }}'s gists{% endblock %}
 
 {% block script %}
 <link rel="stylesheet" href="../static/css/base.css">
@@ -10,25 +10,63 @@
 {% block content %}
 <body>
     <h2 style="text-align:center;"><span >{{ user.user_name }}</span></h2>
-    <button id="gist_num" style="margin-left: 4.6%">
-        <a href="{{ url_for('route_blueprint.user_page', user_id=user.user_id) }}" style='text-decoration:none; color:#333;'>
+    <div id="all&star" style="text-align:center;">
+        <button id="gist_num" style="margin-left: 4.6%">
             All gists: {{ gists|length }}
-        </a>
-    </button>
+        </button>
 
-    {% for gist in gists%}
-    <ul id="{{gist.gist_id}}">
-        <h3 id="{{ 'name%s'%loop.index }}">
-            <span id="{{gist.user_id}}">
-                <a href="{{ '/user/%s'%gist.user_id }}" style='text-decoration:none; color:#333;'>{{gist.user_name}}</a>
-            </span>
-            /<span id="{{gist.gist_id}}">
-                <a href="{{ '/gist/%s'%gist.gist_id }}" style='text-decoration:none; color:#333;'>{{gist.gist_name}}</a>
-            </span>
+        <button id="star_num" style="margin-left: 4.6%">
+            Starred: {{ starred|length }}
+        </button>
+    </div>
+
+
+    <div class="all_gists">
+        {% if gists|length == 0 %}
+        <h3 style="text-align:center;">
+            You don’t have any gists yet. Click here to 
+            <a href="{{ url_for('route_blueprint.create_page') }}">create a gist! </a>
         </h3>
-        <p id="{{ 'desc%s'%loop.index }}">Description: {{ gist.description }}</p>
-        <textarea id="{{ 'content%s'%loop.index }}" name="content">{{ gist.content }}</textarea>
-    </ul>
-    {% endfor %}
+        {% else %}
+        {% for gist in gists%}
+        <ul id="{{gist.gist_id}}">
+            <h3 id="{{ 'name%s'%loop.index }}">
+                <span id="{{gist.user_id}}">
+                    <a href="{{ '/user/%s'%gist.user_id }}">{{gist.user_name}}</a>
+                </span>
+                /<span id="{{gist.gist_id}}">
+                    <a href="{{ '/gist/%s'%gist.gist_id }}">{{gist.gist_name}}</a>
+                </span>
+            </h3>
+            <p id="{{ 'desc%s'%loop.index }}">Description: {{ gist.description }}</p>
+            <textarea id="{{ 'content%s'%loop.index }}" name="content">{{ gist.content }}</textarea>
+        </ul>
+        {% endfor %}
+        {% endif %}
+    </div>
+
+    <div class="starred_gists" style="display: none;">
+        {% if starred|length == 0 %}
+        <h3 style="text-align:center;">
+            You don’t have any starred gists yet.
+        </h3>
+        {% else %}
+        {% for star in starred%}
+        <ul id="{{star.gist_id}}">
+            <h3 id="{{ 'name%s'%loop.index }}">
+                <span id="{{star.user_id}}">
+                    <a href="{{ '/user/%s'%star.user_id }}">{{star.user_name}}</a>
+                </span>
+                /<span id="{{star.gist_id}}">
+                    <a href="{{ '/gist/%s'%star.gist_id }}">{{star.gist_name}}</a>
+                </span>
+            </h3>
+            <p id="{{ 'desc%s'%loop.index }}">Description: {{ star.description }}</p>
+            <textarea id="{{ 'content%s'%loop.index }}" name="content">{{ star.content }}</textarea>
+        </ul>
+        {% endfor %}
+        {% endif %}
+    </div>
+
 </body>
 {% endblock %}
