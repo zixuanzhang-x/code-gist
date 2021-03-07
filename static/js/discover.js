@@ -1,7 +1,8 @@
 $(document).ready(function(){
+    var search = location.href.split('?q=')
     var gists = []
     $.ajax({
-        url: '/api/gist',
+        url: search.length == 1 ? '/api/gist'  : '/api/gist?q=' + search[1],
         type: 'GET',
         dataType: 'json',
         async: false,
@@ -9,6 +10,9 @@ $(document).ready(function(){
             gists = data
         }
     })
+
+    // render search bar content if searched
+    if (search.length > 1) $('input:text').val(search[1])
 
     var gist_list = $('#gists')
     gists.forEach(function(gist, index){
@@ -42,29 +46,6 @@ $(document).ready(function(){
         name_row.appendChild(names)
         info_row.appendChild(name_row)
 
-        // get comments and stars
-        var gist_comments = []
-        $.ajax({
-            url: '/api/gist/'+gist.gist_id+'/comment',
-            type: 'GET',
-            dataType: 'json',
-            async: false,
-            success: function(data) {
-                gist_comments = data
-            }
-        })
-
-        var gist_stars = []
-        $.ajax({
-            url: '/api/gist/'+gist.gist_id+'/star',
-            type: 'GET',
-            dataType: 'json',
-            async: false,
-            success: function(data) {
-                gist_stars = data
-            }
-        })
-
         // append comments and stars
         var feature_row = document.createElement('div')
         feature_row.setAttribute('style', 'margin-top: 2%; margin-left: 12%')
@@ -74,8 +55,8 @@ $(document).ready(function(){
         var stars = document.createElement('button')
         comments.setAttribute('style', 'margin-right: 16px')
 
-        comments.innerHTML= "<a href=/gist/"+gist.gist_id+" ><img src='../static/img/comment.png' >"+gist_comments.length+" comments</a>"
-        stars.innerHTML= "<a href=/gist/"+gist.gist_id+"/stargazers ><img src='../static/img/star.png' >"+gist_stars.length+" stars</a>"
+        comments.innerHTML= "<a href=/gist/"+gist.gist_id+" ><img src='../static/img/comment.png' >"+gist.comments+" comments</a>"
+        stars.innerHTML= "<a href=/gist/"+gist.gist_id+"/stargazers ><img src='../static/img/star.png' >"+gist.stars+" stars</a>"
 
         feature_row.appendChild(comments)
         feature_row.appendChild(stars)
