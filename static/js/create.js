@@ -1,6 +1,6 @@
 $(document).ready(function () {
     let editor = ace.edit('editor', {
-        theme: 'ace/theme/xcode',
+        theme: 'ace/theme/crimson_editor',
         maxLines: 50,
         minLines: 20,
         wrap: true,

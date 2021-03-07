@@ -17,7 +17,7 @@ def get_gists():
             cursor.execute(
                 "SELECT * FROM gist WHERE gist_name LIKE %s", (f'%{q}%',))
         else:
-            cursor.execute("SELECT * FROM gist;")
+            cursor.execute("SELECT * FROM gist ORDER BY created DESC;")
         return jsonify(extract_gists_from_cursor(cursor))
 
 

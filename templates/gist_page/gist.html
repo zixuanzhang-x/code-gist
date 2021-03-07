@@ -10,7 +10,7 @@
 {% block content %}
 <body>
     <div class="row">
-        <h2 style="width:50%"><span>{{gist.gist_name}}</span></h2>
+        <h2 id="gistname" style="width:50%"><span>{{gist.gist_name}}</span></h2>
         <div id="star_group" style="height: 5%; margin-top: 2.6%; margin-left: 15%">
             {% if session.profile %}
             <button type="button" id="star_gist"></button>
@@ -24,7 +24,7 @@
     </div>
 
     <p style="color:grey">Description: {{ gist.description }}</p>
-    <textarea>{{gist.content}}</textarea>
+    <textarea id='editor'>{{gist.content}}</textarea>
     <ul id="{{ gist_id }}"></ul>
     {% for comment in comments%}
     <ul id="comments">

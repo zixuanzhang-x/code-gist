@@ -39,7 +39,7 @@
                 </span>
             </h3>
             <p id="{{ 'desc%s'%loop.index }}">Description: {{ gist.description }}</p>
-            <textarea id="{{ 'content%s'%loop.index }}" name="content">{{ gist.content }}</textarea>
+            <textarea id="{{ 'content%s'%loop.index }}" class="gist" name="content">{{ gist.content }}</textarea>
         </ul>
         {% endfor %}
         {% endif %}
@@ -62,7 +62,7 @@
                 </span>
             </h3>
             <p id="{{ 'desc%s'%loop.index }}">Description: {{ star.description }}</p>
-            <textarea id="{{ 'content%s'%loop.index }}" name="content">{{ star.content }}</textarea>
+            <textarea id="{{ 'content%s'%loop.index }}" class="gist" name="content">{{ star.content }}</textarea>
         </ul>
         {% endfor %}
         {% endif %}
