@@ -18,6 +18,7 @@ $(document).ready(function(){
     gists.forEach(function(gist, index){
         var div = document.createElement('div')
         div.setAttribute('id', gist.gist_id)
+        div.classList.add('gist');
         // info_row contains user_name, gist_name, comments, and stars
         var info_row = document.createElement('div')
         info_row.setAttribute('class', "row")
@@ -70,7 +71,7 @@ $(document).ready(function(){
         div.appendChild(created_time)
 
         // append content
-        var content = document.createElement('textarea')
+        let content = document.createElement('textarea');
         content.value = gist.content
         content.setAttribute('id', 'content'+(index+1))
         div.appendChild(content)
@@ -78,4 +79,18 @@ $(document).ready(function(){
         // append current gist to gist_list
         gist_list.append(div)
     })
+
+    let modelist = ace.require('ace/ext/modelist');
+
+    gists.forEach((gist, index) => {
+        let editor = ace.edit('content' + (index + 1), {
+            theme: 'ace/theme/crimson_editor',
+            maxLines: 20,
+            minLines: 5,
+            wrap: true,
+            autoScrollEditorIntoView: true,
+            mode: modelist.getModeForPath(gist.gist_name).mode,
+            readOnly: true,
+        });
+    });
 })

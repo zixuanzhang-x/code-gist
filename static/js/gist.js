@@ -91,4 +91,16 @@ $(document).ready(function(){
 
             event.preventDefault()
         })
+    
+    let modelist = ace.require('ace/ext/modelist');
+
+    let editor = ace.edit('editor', {
+        theme: 'ace/theme/crimson_editor',
+        maxLines: 50,
+        minLines: 20,
+        wrap: true,
+        autoScrollEditorIntoView: true,
+        mode: modelist.getModeForPath(document.getElementById('gistname').textContent).mode,
+        readOnly: true,
+    });
 })
