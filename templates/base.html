@@ -44,13 +44,13 @@
                                     </a>
                                 </li>
                                 <li class="pure-menu-item">
-                                    <a href="{{ url_for('route_blueprint.user_logout') }}" class="pure-menu-link">Logout</a>
+                                    <a href="{{ url_for('auth_blueprint.user_logout') }}" class="pure-menu-link">Logout</a>
                                 </li>
                             </ul>                    
                         </li>
                         {% else %}
                         <li class="pure-menu-item">
-                            <a href="{{ url_for('route_blueprint.user_login') }}" class="pure-menu-link">Login</a>
+                            <a href="{{ url_for('auth_blueprint.user_login') }}" class="pure-menu-link">Login</a>
                         </li>
                         {% endif %}
                     </ul>
