@@ -29,10 +29,10 @@ $(document).ready(function(){
 
         var user_name = document.createElement('span')
         user_name.setAttribute('id', gist.user_id)
-        user_name.innerHTML = "<a href=/user/"+gist.user_id+" style='text-decoration:none;'>"+gist.user_name+"</a>"
+        user_name.innerHTML = "<a href=/user/"+gist.user_id+" class='gists-username'>"+gist.user_name+"</a>"
         var gist_name = document.createElement('span')
         gist_name.setAttribute('id', gist.gist_id)
-        gist_name.innerHTML = "<a href=/gist/"+gist.gist_id+" style='text-decoration:none;'>"+gist.gist_name+"</a>"
+        gist_name.innerHTML = "<a href=/gist/"+gist.gist_id+" class='gists-gistname'>"+gist.gist_name+"</a>"
         var slash = document.createElement('span')
         slash.innerHTML = " / "
         names.appendChild(user_name)
@@ -74,8 +74,8 @@ $(document).ready(function(){
         var stars = document.createElement('button')
         comments.setAttribute('style', 'margin-right: 16px')
 
-        comments.innerHTML= "<a href=/gist/"+gist.gist_id+" style='text-decoration:none; color:#333;'>"+gist_comments.length+" comments</a>"
-        stars.innerHTML= "<a href=/gist/"+gist.gist_id+"/stargazers style='text-decoration:none; color:#333;'>"+gist_stars.length+" stars</a>"
+        comments.innerHTML= "<a href=/gist/"+gist.gist_id+" ><img src='../static/img/comment.png' >"+gist_comments.length+" comments</a>"
+        stars.innerHTML= "<a href=/gist/"+gist.gist_id+"/stargazers ><img src='../static/img/star.png' >"+gist_stars.length+" stars</a>"
 
         feature_row.appendChild(comments)
         feature_row.appendChild(stars)
