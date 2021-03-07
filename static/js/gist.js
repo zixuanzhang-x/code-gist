@@ -94,7 +94,7 @@ $(document).ready(function(){
                     gists = data
                 }
             })
-            document.getElementById('star_num').innerHTML = gists[0].stars
+            document.getElementById('star_num').innerHTML = 'Stared: ' + gists[0].stars
             event.preventDefault()
         })
 })
