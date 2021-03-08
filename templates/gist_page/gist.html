@@ -3,6 +3,7 @@
 
 {% block script %}
 <link rel="stylesheet" href="../static/css/base.css">
+<link rel="stylesheet" href="../static/css/gist.css">
 <script src="../static/js/base.js"></script>
 <script src="../static/js/gist.js"></script>
 {% endblock %}
@@ -10,26 +11,33 @@
 {% block content %}
 <body>
     <div class="row">
-        <h2 id="gistname" style="width:50%"><span>{{gist.gist_name}}</span></h2>
-        <div id="star_group" style="height: 5%; margin-top: 2.6%; margin-left: 15%">
+        <a href="/user/{{gist.user_id}}"><img src="" id="gist-user-pic"></a>
+        <h3 id="username" ><span><a href="/user/{{gist.user_id}}">{{gist.user_name}}</a></span></h3>
+        <h3><span>&nbsp;/&nbsp;</span></h3>
+        <h3 id="gistname" ><span>{{gist.gist_name}}</span></h3>
+        
+        <div id="star_group">
             {% if session.profile %}
             <button type="button" id="star_gist"></button>
             {% endif %}
+                <h3 id="vl">&nbsp;|&nbsp;</h3>
                 <button>
                     <a id="star_num" href="{{ '/gist/%s/stargazers'%gist.gist_id }}">
+                        <img src="../static/img/star.png">
                         Stared: {{gist.stars}}
                     </a>
                 </button>
         </div>
     </div>
 
-    <p style="color:grey">Description: {{ gist.description }}</p>
+    <p id='gist-desc'>Description: {{ gist.description }}</p>
     <textarea id='editor'>{{gist.content}}</textarea>
     <ul id="{{ gist_id }}"></ul>
     {% for comment in comments%}
     <ul id="comments">
         <p id="{{ comment.comment_id }}">
-            <span id="{{comment.user_id}}">
+            <span id="{{comment.user_id}}" class="forId">
+                <img id="comment-user-pic" src="{{ comment.picture }}">
                 <a id="commented_user"
                    href="{{ '/user/%s'%comment.user_id }}"
                 >

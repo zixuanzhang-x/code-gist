@@ -38,6 +38,7 @@ def gist_page(gist_id):
     for idx in range(len(comments)):
         users = requests.get(url = API_URI + '/api/user/' + str(comments[idx]['user_id'])).json()
         comments[idx]['user_name'] = users[0]['user_name']
+        comments[idx]['picture'] = users[0]['picture']
 
     if 'profile' in session:
         auth0_id = session['profile']['user_id']

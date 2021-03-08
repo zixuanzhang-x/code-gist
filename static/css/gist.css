@@ -1,0 +1,85 @@
+.row {
+	width: 100%;
+	display: flex;
+	margin-top: 5px;
+    padding-bottom: 0;
+    /* border: 1px solid red; */
+}
+
+.row h3 {
+    display: inline-block;
+    /* border: 1px solid green; */
+}
+
+/* gist owner's user picture */
+.row img{
+    /* border: 1px solid red; */
+    border-radius: 50%;
+    margin-right: 10px;
+    margin-top: 15px;
+    width: 30px;
+    height: 30px;
+}
+
+/* gist owner's username */
+#username a:hover {
+    color: rgb(132 176 96);
+}
+
+/* star group button */
+#star_group {
+    margin-left: 50%;
+    margin-top: auto;
+    margin-bottom: auto;
+    /* border: 1px solid green; */
+    height: 70%;
+    vertical-align: middle;
+}
+
+#star_group button {
+    border: 0px;
+    background-color: white;
+    color: rgb(104 104 104);
+    padding: 5px;
+    font: 20px Arial;
+    margin-right: 10px;
+}
+
+#star_group button:hover {
+    border-bottom: 2px solid rgb(104 104 104);
+}
+
+
+
+/* star number button */
+#star_num img {
+    width: 18px;
+    height: 18px;
+    opacity: 0.5;
+}
+
+/* description */
+#gist-desc {
+    /* border: 1px solid red; */
+    color:rgb(104 104 104);
+    margin-top: -10px;
+    margin-left: 30px;
+    font: italic 16px Arial;
+}
+
+/* comments user picture */
+#comment-user-pic {
+
+    /* border: 1px solid rgb(240 240 240); */
+    border: 2px solid red;
+    border-radius: 50%;
+    margin-right: 10px;
+    margin-top: 15px;
+    width: 30px;
+    height: 30px;
+}
+
+/* comments username */
+#comments a:hover {
+    color: rgb(132 176 96);
+}
