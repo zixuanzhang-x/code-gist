@@ -36,6 +36,7 @@
     color: rgb(104 104 104);
     padding: 5px;
     font: 20px Arial;
+    margin-right: 5px;
 }
 
 #left-sec button:hover {
