@@ -1,18 +1,21 @@
 [id^='feature'] {
-    /* border: 1px solid red; */
-    margin-left: 150px;
-    margin-right: 5%;
+    /* border: 1px solid blue; */
+    /* margin-left: 150px; */
+    /* margin-right: 5%; */
     text-align: end;
-    width: auto;
+    width: 30%;
     display: inline-block;
 }
 
 [id^='name'] {
     display: inline-block;
+    /* border: 1px solid red; */
+    width: 65%;
 }
 
 [id^='created'] {
-    margin-top: 30px;
+    margin-top: -15px;
+    /* border: 1px solid green; */
 }
 
 
@@ -21,7 +24,7 @@
     border: 0px solid rgb(104 104 104);
     background-color: white;
     color: rgb(104 104 104);
-    margin-right: 20px;
+    margin-right: 10px;
     padding: 5px;
     font: 16px Arial;
     margin-left: 10px;
