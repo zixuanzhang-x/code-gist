@@ -29,10 +29,8 @@
                         </li>
                         {% if session.profile %}
                         <li class="pure-menu-item pure-menu-has-children pure-menu-allow-hover">
-                            <a title="{{ session['profile'].user_id }}" 
-                               id="current_user"
-                               class="pure-menu-link"
-                            >
+                            <a title="{{ session['profile'].user_id }}" id="current_user" class="pure-menu-link">
+                                <img src="" id="current-user-pic">
                                 {{ session['profile'].name }}
                             </a>
                             <ul class="pure-menu-children">

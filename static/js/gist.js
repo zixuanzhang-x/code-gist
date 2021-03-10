@@ -1,5 +1,34 @@
 $(document).ready(function(){
     var gist_id = location.pathname.split('gist/')[1]
+    // get gist owner's user_id
+    var gist = [] 
+    var gist_user_id = ''
+    $.ajax({
+        url: '/api/gist/' + gist_id,
+        type: 'GET',
+        dataType: 'json',
+        async: false,
+        success: function(data) {
+            gist = data
+        }
+    })   
+    gist_user_id = gist[0].user_id
+    
+    // get gist owner's picture
+    var gist_user = []
+    var gist_user_pic = ''
+    $.ajax({
+        url: '/api/user/' + gist_user_id,
+        type: 'GET',
+        dataType: 'json',
+        async: false,
+        success: function(data) {
+            gist_user = data
+        }
+    })
+    gist_user_pic = gist_user[0].picture
+    document.getElementById('gist-user-pic').src = gist_user_pic  
+    
     // get user_id by auth0_id if have session
     var auth0_id = $('#current_user').attr('title')
     var user_id = ""
@@ -49,10 +78,10 @@ $(document).ready(function(){
                 stared_gists = data
             }
         })
-        document.getElementById('star_gist').innerHTML = 'To star'
+        document.getElementById('star_gist').innerText = 'To star'
         stared_gists.forEach(el => {
             if (el.gist_id == gist_id) {
-                document.getElementById('star_gist').innerHTML = 'Unstar'
+                document.getElementById('star_gist').innerText = 'Unstar'
             }
         })
     }
@@ -71,7 +100,7 @@ $(document).ready(function(){
                     },
                     success: function(data) {
                         document.getElementById('star_gist').innerHTML = 'Unstar'
-                        star_num.innerText = 'Stared: ' + (current_num+1)
+                        star_num.innerHTML = '<img src="../static/img/star.png">Stared: ' + (current_num+1)
                     }
                 })
             } else {
@@ -84,7 +113,7 @@ $(document).ready(function(){
                     },
                     success: function(data) {
                         document.getElementById('star_gist').innerHTML = 'To star'
-                        star_num.innerText = 'Stared: ' + (current_num-1)
+                        star_num.innerHTML = '<img src="../static/img/star.png">Stared: ' + (current_num-1)
                     }
                 })
             }

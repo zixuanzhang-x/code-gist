@@ -10,7 +10,7 @@ body {
     width: 100%;
     
 }
-
+/* site logo */
 #header-logo {
     /* border: 1px solid red; */
     width: 100%;
@@ -26,10 +26,7 @@ body {
     background-color: rgb(240 240 240);
 }
 
-#header-logo a{
-    /* border: 1px solid blue; */
-}
-
+/* menu bar */
 #header-menu {
     margin-top: 10px;
     text-align: center;
@@ -38,18 +35,40 @@ body {
     margin-right: auto;
     background-color: white;
     box-shadow: 5px 5px 10px gray;
+    
+    /* border: 1px solid red; */
+}
+
+#header-menu a {
+    /* border: 1px solid blue; */
+    display: inline-block;
+    vertical-align: middle;
 }
 
 #header-menu a:hover{
     color: rgb(132 176 96);
     background-color: white;
+
 }
+
 
 a:visited, a:link {
     text-decoration: none;
     color: rgb(104 104 104);
 }
 
+#current-user-pic {
+    width: 30px;
+    height: 30px;
+    /* border: 1px solid red; */
+    border-radius: 50%;
+    margin-right: 4px;
+    vertical-align: middle;
+
+}
+
+
+/* content */
 #content {
     /* border: 1px solid blue; */
     background-color: white;
@@ -63,7 +82,7 @@ a:visited, a:link {
 }
 
 
-
+/* footer */
 footer {
     /* border: 1px solid red; */
     flex: 0 0 50px;
@@ -118,23 +137,6 @@ textarea {
 	margin: 10px;
 }
 
-.row {
-	width: 100%;
-	display: flex;
-	margin-top: 5px;
-}
-
-.grid-container {
-	display: grid;
-	grid-column-gap: 50px;
-	grid-template-columns: auto auto auto;
-	padding: 10px;
-}
-
-.grid-item {
-	padding: 20px;
-	text-align: center;
-}
 
 .ace_editor {
     border: 1px solid lightgrey;
