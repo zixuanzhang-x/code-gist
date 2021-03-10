@@ -3,9 +3,7 @@ import requests
 
 from flask import Blueprint, render_template, redirect, url_for, session, current_app
 
-from urllib.parse import urlencode
 from db import db
-from auth.auth0 import auth0
 from utils.login_util import login_required
 
 route_blueprint = Blueprint('route_blueprint', __name__)
@@ -51,38 +49,3 @@ def gist_stargazers_page(gist_id):
     stargazers = requests.get(url = API_URI + '/api/gist/' + str(gist_id) + '/star').json()
 
     return render_template('gist_page/gist_stargazers.html', gist=gists[0], stargazers=stargazers)
-
-@route_blueprint.route('/login')
-def user_login():
-    if 'profile' in session:
-        return redirect(url_for('route_blueprint.discover_page'))
-    else:
-        return auth0().authorize_redirect(redirect_uri=url_for('route_blueprint.callback', _external=True))
-
-@route_blueprint.route('/callback')
-def callback():
-    # register by auth0
-    auth0().authorize_access_token()
-    response = auth0().get('userinfo')
-    userinfo = response.json()
-
-    session['jwt_payload'] = userinfo
-    session['profile'] = {
-        'user_id': userinfo['sub'],
-        'name': userinfo['name'],
-        'picture': userinfo['picture']
-    }
-
-    requests.post(API_URI + '/api/user', \
-        data={'auth0_id': userinfo['sub'],
-              'user_name': userinfo['name'],
-              'picture': userinfo['picture'],
-              })
-
-    return redirect(url_for('route_blueprint.create_page'))
-
-@route_blueprint.route('/logout')
-def user_logout():
-    session.clear()
-    params = { 'returnTo': url_for('route_blueprint.discover_page', _external=True), 'client_id': os.environ['AUTH0_CLIENT_ID'] }
-    return redirect(auth0().api_base_url + '/v2/logout?' + urlencode(params))

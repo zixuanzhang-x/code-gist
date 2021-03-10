@@ -20,63 +20,19 @@ $(document).ready(function(){
         var div = document.createElement('div')
         div.setAttribute('id', gist.gist_id)
         div.classList.add('gist');
-        // info_row contains user_name, gist_name, comments, and stars
+        // info_row contains user pic, user_name, gist_name, comments, and stars
         var info_row = document.createElement('div')
         info_row.setAttribute('class', "row")
         info_row.setAttribute('id', 'info_row')
         info_row.setAttribute('style', "height:30px")
 
         // append profile picture, user_name and gist_name
-        var name_row = document.createElement('div')
-        name_row.setAttribute('style', "width:50%")
-        name_row.setAttribute('id', 'name'+(index+1))
-
-        var names = document.createElement('h3')
-
-        var auth = []
-        $.ajax({
-            url: '/api/user/' + gist.user_id,
-            type: 'GET',
-            dataType: 'json',
-            async: false,
-            success: function(data) {
-                auth = data
-            }
-        })
-        var user_pic = document.createElement('span')
-        user_pic.setAttribute('id', gist.user_pic)
-        user_pic.innerHTML = "<img src='" + auth[0].picture + "' class='gists-userpic'>"
-        var user_name = document.createElement('span')
-        user_name.setAttribute('id', gist.user_id)
-        user_name.innerHTML = "<a href=/user/"+gist.user_id+" class='gists-username'>"+gist.user_name+"</a>"
-        var gist_name = document.createElement('span')
-        gist_name.setAttribute('id', gist.gist_id)
-        gist_name.innerHTML = "<a href=/gist/"+gist.gist_id+" class='gists-gistname'>"+gist.gist_name+"</a>"
-        var slash = document.createElement('span')
-        slash.innerHTML = " / "
-        names.appendChild(user_pic)  
-        names.appendChild(user_name)
-        names.appendChild(slash)
-        names.appendChild(gist_name)
-
-        name_row.appendChild(names)
-        info_row.appendChild(name_row)
-
+        var user_gist_row = get_user_and_gist(gist, index)
+        info_row.appendChild(user_gist_row)
         // append comments and stars
-        var feature_row = document.createElement('div')
-        feature_row.setAttribute('style', 'margin-top: 2%; margin-left: 12%')
-        feature_row.setAttribute('id', 'feature'+(index+1))
-
-        var comments = document.createElement('button')
-        var stars = document.createElement('button')
-        comments.setAttribute('style', 'margin-right: 16px')
-
-        comments.innerHTML= "<a href=/gist/"+gist.gist_id+" ><img src='../static/img/comment.png' class='btn' >"+gist.comments+" comments</a>"
-        stars.innerHTML= "<a href=/gist/"+gist.gist_id+"/stargazers ><img src='../static/img/star.png' class='btn' >"+gist.stars+" stars</a>"
-
-        feature_row.appendChild(comments)
-        feature_row.appendChild(stars)
+        var feature_row = get_comment_and_star(gist, index)
         info_row.appendChild(feature_row)
+
         div.appendChild(info_row)
 
         // append created time 
@@ -94,6 +50,67 @@ $(document).ready(function(){
         // append current gist to gist_list
         gist_list.append(div)
     })
+
+    function get_user_and_gist(gist, index) {
+        var user_gist_row = document.createElement('div')
+        user_gist_row.setAttribute('style', "width:50%")
+        user_gist_row.setAttribute('id', 'name'+(index+1))
+
+        var pic_names = document.createElement('h3')
+
+        var users = []
+        $.ajax({
+            url: '/api/user/' + gist.user_id,
+            type: 'GET',
+            dataType: 'json',
+            async: false,
+            success: function(data) {
+                users = data
+            }
+        })
+        var user_pic = document.createElement('span')
+        user_pic.setAttribute('id', gist.user_pic)
+        user_pic.innerHTML = "<img src='" + users[0].picture + "' class='gists-userpic'>"
+
+        var user_name = document.createElement('span')
+        user_name.setAttribute('id', gist.user_id)
+        user_name.innerHTML = "<a href=/user/"+gist.user_id+" class='gists-username'>"+gist.user_name+"</a>"
+
+        var gist_name = document.createElement('span')
+        gist_name.setAttribute('id', gist.gist_id)
+        gist_name.innerHTML = "<a href=/gist/"+gist.gist_id+" class='gists-gistname'>"+gist.gist_name+"</a>"
+
+        var slash = document.createElement('span')
+        slash.innerHTML = " / "
+
+        pic_names.appendChild(user_pic)  
+        pic_names.appendChild(user_name)
+        pic_names.appendChild(slash)
+        pic_names.appendChild(gist_name)
+
+        user_gist_row.appendChild(pic_names)
+        return user_gist_row
+    }
+
+    function get_comment_and_star(gist, index) {
+        var feature_row = document.createElement('div')
+
+        feature_row.setAttribute('style', 'margin-top: 2%; margin-left: 12%')
+        feature_row.setAttribute('id', 'feature'+(index+1))
+
+        var comments = document.createElement('button')
+        var stars = document.createElement('button')
+        comments.setAttribute('style', 'margin-right: 16px')
+
+        comments.innerHTML = "<a href=/gist/"+gist.gist_id+" ><img src='../static/img/comment.png' class='btn' >"
+                             +gist.comments+" comments</a>"
+        stars.innerHTML = "<a href=/gist/"+gist.gist_id+"/stargazers ><img src='../static/img/star.png' class='btn' >"
+                          +gist.stars+" stars</a>"
+
+        feature_row.appendChild(comments)
+        feature_row.appendChild(stars)
+        return feature_row
+    }
 
     let modelist = ace.require('ace/ext/modelist');
 
