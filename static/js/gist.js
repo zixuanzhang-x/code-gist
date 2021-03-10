@@ -39,7 +39,7 @@ $(document).ready(function(){
             url: '/api/gist/'+ gist_id +'/comment',
             type: 'POST',
             data: {
-                content: $('#content').val(),
+                content: $('textarea#content').val(),
                 user_id: user_id,
             },
         }).done(function(response) {
@@ -49,7 +49,7 @@ $(document).ready(function(){
                 window.location.reload()
             }
         })
-        event.preventDefault()        
+        event.preventDefault()       
     })
 
     // check whether user stared this gist
