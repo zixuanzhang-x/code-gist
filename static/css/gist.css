@@ -11,6 +11,7 @@
     /* border: 1px solid green; */
 }
 
+
 /* gist owner's user picture */
 .row img{
     /* border: 1px solid red; */
@@ -26,14 +27,22 @@
     color: rgb(132 176 96);
 }
 
+/* name group */
+#name_group {
+    /* border: 1px solid green; */
+    width: 65%;
+}
+
+
 /* star group button */
 #star_group {
-    margin-left: 50%;
     margin-top: auto;
     margin-bottom: auto;
-    /* border: 1px solid green; */
     height: 70%;
     vertical-align: middle;
+    /* border:1px solid red; */
+    width: 30%;
+    text-align: end;
 }
 
 #star_group button {
@@ -82,6 +91,20 @@
     color: rgb(132 176 96);
 }
 
+/* existing comments textarea */
+#comments textarea {
+    width: 90%;
+    border-radius: 5px;
+    font: 20px Arial;
+}
+
+/* input comment textarea */
+form textarea {
+    /* border: 1px solid red; */
+    border-radius: 10px;
+    width: 90%;
+}
+
 
 /* comment submit button */
 form button {
@@ -90,9 +113,9 @@ form button {
 
 #submit {
     background-color: white;
-    margin-top: 10px;
+    margin-top: 0px;
     border: 1px solid rgb(104 104 104);
-    border-radius: 30%;
+    border-radius: 10px;
 }
 
 #submit:hover {

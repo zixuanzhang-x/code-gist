@@ -24,7 +24,6 @@ $(document).ready(function(){
         var info_row = document.createElement('div')
         info_row.setAttribute('class', "row")
         info_row.setAttribute('id', 'info_row')
-        info_row.setAttribute('style', "height:30px")
 
         // append profile picture, user_name and gist_name
         var user_gist_row = get_user_and_gist(gist, index)
@@ -53,7 +52,6 @@ $(document).ready(function(){
 
     function get_user_and_gist(gist, index) {
         var user_gist_row = document.createElement('div')
-        user_gist_row.setAttribute('style', "width:50%")
         user_gist_row.setAttribute('id', 'name'+(index+1))
 
         var pic_names = document.createElement('h3')
