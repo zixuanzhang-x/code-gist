@@ -1,6 +1,6 @@
 from flask import Blueprint, request, current_app, jsonify
 from db import db
-from utils.api_util import extract_gists_from_cursor, extract_comments_from_cursor, extract_users_from_cursor
+from utils.api_util import extract_gists_from_cursor, extract_comments_from_cursor, extract_users_from_cursor, extract_joined_gists_from_cursor, extract_joined_comments_from_cursor
 
 gist_api_blueprint = Blueprint('gist_api_blueprint', __name__)
 
@@ -15,10 +15,15 @@ def get_gists():
     with db.get_db_cursor(True) as cursor:
         if q:  # search for gists match pattern q
             cursor.execute(
-                "SELECT * FROM gist WHERE gist_name LIKE %s", (f'%{q}%',))
+                """SELECT * FROM gist 
+                   JOIN gist_user ON gist_user.user_id = gist.user_id
+                   WHERE gist_name LIKE %s ORDER BY created DESC;""", (f'%{q}%',))
         else:
-            cursor.execute("SELECT * FROM gist ORDER BY created DESC;")
-        return jsonify(extract_gists_from_cursor(cursor))
+            cursor.execute(
+                """SELECT * FROM gist
+                   JOIN gist_user ON gist_user.user_id = gist.user_id
+                   ORDER BY created DESC;""")
+        return jsonify(extract_joined_gists_from_cursor(cursor))
 
 
 @gist_api_blueprint.route('/gist', methods=['POST'])
@@ -77,7 +82,8 @@ def update_gist(gist_id):
                                                        content or gist['content'],
                                                        gist_id))
 
-            cursor.execute("SELECT * FROM gist WHERE gist_id = %s;;", (gist_id,))
+            cursor.execute(
+                "SELECT * FROM gist WHERE gist_id = %s;;", (gist_id,))
             return jsonify(extract_gists_from_cursor(cursor))
 
 
@@ -86,8 +92,10 @@ def get_gist_comments(gist_id):
     """Return a list of comments of this gist."""
     with db.get_db_cursor(True) as cursor:
         cursor.execute(
-            "SELECT * FROM gist_comment WHERE gist_id = %s;;", (gist_id,))
-        return jsonify(extract_comments_from_cursor(cursor))
+            """SELECT * FROM gist_comment
+               JOIN gist_user ON gist_user.user_id = gist_comment.user_id
+               WHERE gist_id = %s;""", (gist_id,))
+        return jsonify(extract_joined_comments_from_cursor(cursor))
 
 
 @gist_api_blueprint.route('/gist/<int:gist_id>/comment', methods=['POST'])
@@ -108,7 +116,8 @@ def create_gist_comments(gist_id):
             current_app.logger.info(
                 f"Created new comment: {{'comment_id': {comment_id}, 'gist_id': {gist_id}, 'user_id': {user_id}}}")
 
-            cursor.execute("UPDATE gist SET comments = comments + 1 WHERE gist_id = %s", (gist_id,))
+            cursor.execute(
+                "UPDATE gist SET comments = comments + 1 WHERE gist_id = %s", (gist_id,))
 
             return {'comment_id': comment_id}
         except Exception as e:
@@ -137,12 +146,13 @@ def create_gist_star(gist_id):
             current_app.logger.info(
                 f"""Created new star: {{'user_id': {user_id}, 'gist_id': {gist_id}}}""")
 
-            cursor.execute("UPDATE gist SET stars = stars + 1 WHERE gist_id = %s", (gist_id,))
+            cursor.execute(
+                "UPDATE gist SET stars = stars + 1 WHERE gist_id = %s", (gist_id,))
 
             return {'user_id': user_id, 'gist_id': gist_id}
         except Exception as e:
             return jsonify(error=400, text=str(e)), 400
-        
+
 
 @gist_api_blueprint.route('/gist/<int:gist_id>/star', methods=['DELETE'])
 def delete_gist_star(gist_id):
@@ -156,7 +166,8 @@ def delete_gist_star(gist_id):
             current_app.logger.info(
                 f"""Deleted an old star: {{'user_id': {user_id}, 'gist_id': {gist_id}}}""")
 
-            cursor.execute("UPDATE gist SET stars = stars - 1 WHERE gist_id = %s", (gist_id,))
+            cursor.execute(
+                "UPDATE gist SET stars = stars - 1 WHERE gist_id = %s", (gist_id,))
 
             return {'user_id': user_id, 'gist_id': gist_id}
         except Exception as e:
