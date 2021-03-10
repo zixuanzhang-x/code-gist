@@ -1,3 +1,20 @@
+[id^='feature'] {
+    /* border: 1px solid red; */
+    margin-left: 150px;
+    margin-right: 5%;
+    text-align: end;
+    width: auto;
+    display: inline-block;
+}
+
+[id^='name'] {
+    display: inline-block;
+}
+
+[id^='created'] {
+    margin-top: 30px;
+}
+
 
 /* comments & stars button */
 #gists button {
@@ -7,7 +24,7 @@
     margin-right: 20px;
     padding: 5px;
     font: 16px Arial;
-    margin-left: 20px;
+    margin-left: 10px;
 }
 
 button img {
