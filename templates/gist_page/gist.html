@@ -11,10 +11,12 @@
 {% block content %}
 <body>
     <div class="row">
-        <a href="/user/{{gist.user_id}}"><img src="" id="gist-user-pic"></a>
-        <h3 id="username" ><span><a href="/user/{{gist.user_id}}">{{gist.user_name}}</a></span></h3>
-        <h3><span>&nbsp;/&nbsp;</span></h3>
-        <h3 id="gistname" ><span>{{gist.gist_name}}</span></h3>
+        <div id="name_group">
+            <a href="/user/{{gist.user_id}}"><img src="" id="gist-user-pic"></a>
+            <h3 id="username" ><span><a href="/user/{{gist.user_id}}">{{gist.user_name}}</a></span></h3>
+            <h3><span>&nbsp;/&nbsp;</span></h3>
+            <h3 id="gistname" ><span>{{gist.gist_name}}</span></h3>
+        </div>
         
         <div id="star_group">
             {% if session.profile %}
