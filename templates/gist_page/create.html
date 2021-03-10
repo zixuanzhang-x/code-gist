@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}Create a new Gist{% endblock %}
+
+{% block script %}
+<link rel="stylesheet" href="../static/css/create.css">
+<script src="../static/js/create.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+<link rel="stylesheet" href="../static/css/base.css">
+<script src="../static/js/base.js"></script>
+{% endblock %}
+
+{% block content %}
+<body>
+    <form id="gist-form" class="pure-form pure-form-stacked">
+        <fieldset>
+            <legend>Instantly share code, notes, and snippets.</legend>
+
+            <input type="text" id="description" name="description" placeholder="Gist description..." required/>
+
+            <input type="text" id="gistname" name="gistname" placeholder="Filename including extension..." required/>
+            
+            <pre id="editor"></pre>
+            <!-- <div class="scrollmargin"></div> -->
+            
+            <button type="submit" class="pure-button button-success">Create Gist</button>
+        </fieldset>
+    </form>
+</body>
+{% endblock %}

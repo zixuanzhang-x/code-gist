@@ -1,0 +1,56 @@
+/* left & right section */
+#left-sec {
+    /* border: 1px solid red; */
+    display: inline-block;
+    vertical-align: top;
+    width: 25%;
+    margin-right: 3%;
+    padding-top: 30px;
+}
+
+#right-sec {
+    /* border: 1px solid blue; */
+    display: inline-block;
+    width: 68%;
+}
+
+
+/* user profile picture */
+#user-info img {
+    border: 1px solid rgb(240 240 240);
+    border-radius: 50%;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* username */
+#left-sec h2 {
+    text-align: center;
+}
+
+/* all gists & starred button */
+#left-sec button {
+    border: 0px solid rgb(104 104 104);
+    background-color: white;
+    color: rgb(104 104 104);
+    padding: 5px;
+    font: 20px Arial;
+    margin-right: 5px;
+}
+
+#left-sec button:hover {
+    border-bottom: 2px solid rgb(104 104 104);
+
+}
+
+button img {
+    padding-right: 8px;
+    opacity: 0.5;
+    width: 18px;
+}
+
+/* starred_gists */
+.starred_gists {
+    display: none;
+}

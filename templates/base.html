@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{% block title %}{% endblock %}</title>
+        <link rel="shortcut icon" href="#"/>
+        <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.5/build/pure-min.css" integrity="sha384-LTIDeidl25h2dPxrB2Ekgc9c7sEC3CWGM6HeFmuDNUjX76Ert4Z4IY714dhZHPLd" crossorigin="anonymous">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/ace.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/ext-modelist.min.js"></script>
+        {% block script %}{% endblock %}
+    </head>
+    <body>
+            <div class="pure-menu pure-menu-horizontal wrapper">
+
+                <div id="header-logo">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Twemoji_1f34b.svg/512px-Twemoji_1f34b.svg.png" width="50">
+                    <a href="{{ url_for('route_blueprint.discover_page') }}">Lemon Gist</a>
+                </div>
+
+                <div id="header-menu">
+                    <ul class="pure-menu-list">
+                        <li class="pure-menu-item">
+                            <a href="{{ url_for('route_blueprint.create_page') }}" class="pure-menu-link"> Create Gist</a>
+                        </li>
+                        <li class="pure-menu-item">
+                            <a href="{{ url_for('route_blueprint.discover_page') }}" class="pure-menu-link"> All Gists</a>
+                        </li>
+                        {% if session.profile %}
+                        <li class="pure-menu-item pure-menu-has-children pure-menu-allow-hover">
+                            <a title="{{ session['profile'].user_id }}" id="current_user" class="pure-menu-link">
+                                <img src="" id="current-user-pic">
+                                {{ session['profile'].name }}
+                            </a>
+                            <ul class="pure-menu-children">
+                                <li class="pure-menu-item">
+                                    <a id="current_gists"
+                                       class="pure-menu-link"
+                                    >
+                                        My gists
+                                    </a>
+                                </li>
+                                <li class="pure-menu-item">
+                                    <a href="{{ url_for('auth_blueprint.user_logout') }}" class="pure-menu-link">Logout</a>
+                                </li>
+                            </ul>                    
+                        </li>
+                        {% else %}
+                        <li class="pure-menu-item">
+                            <a href="{{ url_for('auth_blueprint.user_login') }}" class="pure-menu-link">Login</a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </div>
+
+                
+            </div>
+        <div id="content" class="container">
+            {% block content %}{% endblock %}
+        </div>
+    </body>
+    {% include 'footer.html' %}
+</html>

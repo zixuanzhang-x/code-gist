@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Discover Gists{% endblock %}
+
+{% block script %}
+<link rel="stylesheet" href="../static/css/base.css">
+<link rel="stylesheet" href="../static/css/discover.css">
+<script src="../static/js/base.js"></script>
+<script src="../static/js/discover.js"></script>
+{% endblock %}
+
+{% block content %}
+<body>
+    <h2 style="text-align:center;"><span>All Gists</span></h2>
+    <form style="text-align:center;">
+        <input type="text" name="q" id="search" placeholder="Search gist name...">
+    </form>
+    <ul id='gists'></ul>
+</body>
+{% endblock %}
