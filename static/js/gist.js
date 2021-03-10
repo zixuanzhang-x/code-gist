@@ -12,22 +12,8 @@ $(document).ready(function(){
             gist = data
         }
     })   
-    gist_user_id = gist[0].user_id
-    
-    // get gist owner's picture
-    var gist_user = []
-    var gist_user_pic = ''
-    $.ajax({
-        url: '/api/user/' + gist_user_id,
-        type: 'GET',
-        dataType: 'json',
-        async: false,
-        success: function(data) {
-            gist_user = data
-        }
-    })
-    gist_user_pic = gist_user[0].picture
-    document.getElementById('gist-user-pic').src = gist_user_pic  
+
+    document.getElementById('gist-user-pic').src = gist[0].picture
     
     // get user_id by auth0_id if have session
     var auth0_id = $('#current_user').attr('title')

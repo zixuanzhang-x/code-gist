@@ -58,19 +58,9 @@ $(document).ready(function(){
 
         var pic_names = document.createElement('h3')
 
-        var users = []
-        $.ajax({
-            url: '/api/user/' + gist.user_id,
-            type: 'GET',
-            dataType: 'json',
-            async: false,
-            success: function(data) {
-                users = data
-            }
-        })
         var user_pic = document.createElement('span')
         user_pic.setAttribute('id', gist.user_pic)
-        user_pic.innerHTML = "<img src='" + users[0].picture + "' class='gists-userpic'>"
+        user_pic.innerHTML = "<img src='" + gist.picture + "' class='gists-userpic'>"
 
         var user_name = document.createElement('span')
         user_name.setAttribute('id', gist.user_id)
