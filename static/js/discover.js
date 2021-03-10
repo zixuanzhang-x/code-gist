@@ -85,7 +85,6 @@ $(document).ready(function(){
     function get_comment_and_star(gist, index) {
         var feature_row = document.createElement('div')
 
-        feature_row.setAttribute('style', 'margin-top: 2%; margin-left: 12%')
         feature_row.setAttribute('id', 'feature'+(index+1))
 
         var comments = document.createElement('button')

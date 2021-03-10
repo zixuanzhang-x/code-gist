@@ -81,3 +81,20 @@
 #comments a:hover {
     color: rgb(132 176 96);
 }
+
+
+/* comment submit button */
+form button {
+    margin-left: 50px;
+}
+
+#submit {
+    background-color: white;
+    margin-top: 10px;
+    border: 1px solid rgb(104 104 104);
+    border-radius: 30%;
+}
+
+#submit:hover {
+    background-color: rgb(240 240 240);
+}
