@@ -35,7 +35,10 @@ CSCI 5117, Spring 2021, [assignment description](https://canvas.umn.edu/courses/
 **[Add a screenshot of each key page (maximum 4)](https://stackoverflow.com/questions/10189356/how-to-add-screenshot-to-readmes-in-github-repository)
 along with a very brief caption:**
 
-![](https://media.giphy.com/media/o0vwzuFwCGAFO/giphy.gif)
+![All Gists Page](./static/img/all_gist_page.png?raw=true "Display All Gists")
+![Create Gist Page](./static/img/create_gist_page.png?raw=true "Create your Gist")
+![Gist Page](./static/img/gist_page.png?raw=true "Display single Gist")
+![User Page](./static/img/user_page.png?raw=true "Display User Profile")
 
 
 ## Mock-up 
@@ -49,8 +52,9 @@ Here's the [link](https://drive.google.com/file/d/1dfxoe_rPjN6-7FXmW1-2iv5YfL5lZ
 **Document integrations with 3rd Party code or services here.
 Please do not document required libraries. or libraries that are mentioned in the product requirements**
 
-* Library or service name: description of use
-* ...
+* Ace: render Gist editor
+* axio: send api request
+* jquery: render website
 
 **If there's anything else you would like to disclose about how your project
 relied on external code, expertise, or anything else, please disclose that
