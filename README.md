@@ -32,9 +32,6 @@ CSCI 5117, Spring 2021, [assignment description](https://canvas.umn.edu/courses/
 
 ## Screenshots of Site
 
-**[Add a screenshot of each key page (maximum 4)](https://stackoverflow.com/questions/10189356/how-to-add-screenshot-to-readmes-in-github-repository)
-along with a very brief caption:**
-
 ![All Gists Page](./static/img/all_gist_page.png?raw=true "Display All Gists")
 ![Create Gist Page](./static/img/create_gist_page.png?raw=true "Create your Gist")
 ![Gist Page](./static/img/gist_page.png?raw=true "Display single Gist")
