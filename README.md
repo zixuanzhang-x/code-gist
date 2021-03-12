@@ -5,8 +5,8 @@ CSCI 5117, Spring 2021, [assignment description](https://canvas.umn.edu/courses/
 ## App Info:
 
 * Team Name: **Lemon Squeezy**
-* App Name: TODO
-* App Link: <https://TODO.heroku.com/>
+* App Name: Lemon Gists
+* App Link: <https://lemon-gists.herokuapp.com/>
 
 ### Students
 
@@ -20,8 +20,8 @@ CSCI 5117, Spring 2021, [assignment description](https://canvas.umn.edu/courses/
 **Describe the most challenging features you implemented
 (one sentence per bullet, maximum 4 bullets):**
 
-* instantly share code, notes, and snippets 
-* ...
+* Get user_id by user's auth0_id
+* Design and implement schema and backend api
 
 ## Testing Notes
 
